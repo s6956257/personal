@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <link rel="stylesheet" href="/stylesheet/dashboard.css">
+    <style>
+        .profile-form .input-group {
+            margin-bottom: 1.5rem;
+        }
+        .profile-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-text-color);
+        }
+        .profile-form input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--dark-bg);
+            border: 1px solid #444;
+            color: var(--text-color);
+            border-radius: 8px;
+        }
+        .profile-info {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+body {
+    background-color: var(--dark-bg, #121212);
+    color: var(--text-color, #EAEAEA);
+    font-family: var(--body-font, 'Poppins', sans-serif);
+}
+.dashboard-container {
+    max-width: 900px;
+    margin: 10px auto 40px;
+    padding: 2rem;
+}
+.dashboard-container h1 {
+    font-family: var(--heading-font, 'Playfair Display', serif);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color, #D4AF37);
+    text-align: center;
+}
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.order-table thead {
+    background-color: var(--card-bg, #1E1E1E);
+}
+.order-table th, .order-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+.btn-product {
+    background: transparent;
+    color: var(--primary-color, #D4AF37);
+    border: 1px solid var(--primary-color, #D4AF37);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+.btn-product:hover {
+    background: var(--primary-color, #D4AF37);
+    color: var(--dark-bg, #121212);
+}
+@media (max-width: 768px) {
+    .order-table thead {
+        display: none;
+    }
+    .order-table tr {
+        display: block;
+        background: var(--card-bg, #1E1E1E);
+        margin-bottom: 1.5rem;
+        border-radius: 10px;
+        padding: 1rem;
+        border: 1px solid #333;
+    }
+    .order-table td {
+        display: block;
+        text-align: right; 
+        padding: 0.5rem 0;
+        border-bottom: none;
+        position: relative;
+    }
+    .order-table td::before {
+        content: attr(data-label); 
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        color: var(--secondary-text-color, #aaa);
+    }
+    .order-table td:last-child {
+        text-align: center;
+        padding-top: 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>My Profile</h1>
+        <div class="profile-info">
+            <p><strong>Username:</strong> <%= user.username %></p>
+            <p><strong>Email:</strong> <%= user.email %></p>
+        </div>
+        <hr style="margin: 2rem 0; border-color: #333;">
+        <h2>Update Your Details</h2>
+        <form action="/profile/update" method="POST" class="profile-form">
+            <div class="input-group">
+                <label for="email">Update Email:</label>
+                <input type="email" name="email" id="email" placeholder="Enter new email address">
+            </div>
+            <div class="input-group">
+                <label for="newpassword">Update Password:</label>
+                <input type="password" name="newpassword" id="newpassword" placeholder="Enter new password">
+            </div>
+            <button type="submit" class="btn" style="width: 100%; margin-bottom: 1rem;">Save Changes</button>
+        </form>
+         <a href="/my-orders" class="btn" style="width: 100%; background-color: #1E1E1E; text-align: center;border: 2px solid #D4AF37;color: #aaa;">Back to My Orders</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="detailPageTitle">Product Details - Hünny Brand</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="/stylesheet/style.css" />
+    </head>
+
+<body>
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="brand-name">Rahaaf</a> <nav class="nav-links">
+                <ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa-solid fa-list-check"></i> Services
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <ul class="navmenu-1">
+                            <li>
+                                <a href="#">
+                                    <i class="fa-solid fa-truck-fast" style="color:#D4AF37; margin-right:8px;"></i>
+                                    Delivery
+                                    <span style="display:block; font-size:0.85em; color:#aaa; margin-left:28px;">Fast & secure shipping</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa-solid fa-person-dress" style="color:#D4AF37; margin-right:8px;"></i>
+                                    Women Collection
+                                    <span style="display:block; font-size:0.85em; color:#aaa; margin-left:28px;">Elegant scents for her</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa-solid fa-person" style="color:#D4AF37; margin-right:8px;"></i>
+                                    Men Collection
+                                    <span style="display:block; font-size:0.85em; color:#aaa; margin-left:28px;">Signature fragrances for him</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#collection"><i class="fa-solid fa-swatchbook"></i> Collection</a></li>
+                    <li><a href="index.html#contact"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <form class="search-bar">
+                <input type="text" placeholder="Search scents..." />
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-count">0</span>
+            </div>
+
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <section id="product-detail" class="container">
+        <div class="detail-card">
+            <div class="detail-image-container">
+                <img id="detailImage" src="" alt="Product Image" />
+            </div>
+            <div class="detail-content">
+                <h1 id="detailName"></h1>
+                <p id="detailBrand" class="detail-brand"></p>
+                <p id="detailQuality" class="detail-quality"></p>
+                <div id="detailPrice" class="detail-price"></div>
+                <p id="detailDescription" class="detail-description"></p>
+                <button id="detailOrderNowBtn" class="btn order-now-btn-detail">Order Now</button>
+                <a href="index.html#collection" class="btn back-to-collection">Back to Collection</a>
+            </div>
+        </div>
+        <p id="productNotFound" class="no-results" style="display: none;">Product not found.</p>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <a href="index.html" class="brand-name">R̷a̷h̷a̷f̷</a>
+                    <p class="footer-about">
+                        Discover exclusive fragrances that define your aura and tell your unique story.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#hero">Home</a></li>
+                        <li><a href="index.html#collection">Collection</a></li>
+                        <li><a href="#">Delivery</a></li>
+                        <li><a href="#">Our Story</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Hünny Brand. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/javascript/product-detail.js"></script> </body>
+
+</html>

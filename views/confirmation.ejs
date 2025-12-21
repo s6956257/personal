@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed!</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <style>
+        .confirmation-container {
+            max-width: 800px;
+            margin: 120px auto 40px;
+            padding: 40px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--primary-color);
+        }
+        .confirmation-container h1 {
+            color: var(--primary-color);
+            font-family: var(--heading-font);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .confirmation-container p {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .order-details {
+            text-align: left;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>Thank You, <%= order.customer.name %>!</h1>
+        <p>Your order has been placed successfully.</p>
+        <p>Your Order ID is: <strong><%= order._id %></strong></p>
+        <p>We will contact you shortly on <%= order.customer.phone %> for verification.</p>
+        <div class="order-details">
+            <h2>Order Summary</h2>
+            <p><strong>Product:</strong> <%= order.productName %> (<%= order.brand %>)</p>
+            <p><strong>Price:</strong> $<%= order.price.toFixed(2) %></p>
+            <p><strong>Shipping to:</strong> <%= order.customer.address %></p>
+        </div>
+        <a href="/" class="btn" style="margin-top: 2rem;">Back to Store</a>
+    </div>
+    </body>
+</html>
