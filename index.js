@@ -32,51 +32,12 @@ passport.use(new LocalStrategy(userModel.authenticate()));
 passport.serializeUser(userModel.serializeUser());
 passport.deserializeUser(userModel.deserializeUser());
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-}
-function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.role === 'admin') {
-        return next();
-    }
-    res.redirect('/');
-}
 app.get('/', (req, res) => {
     fs.readdir('./files', function(err, files) { 
         res.render("index", { files: files || [] });
     });
 });
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-}), (req, res) => {});
-app.get('/register', (req, res) => {
-    res.render('register');
-});
-app.post('/register', (req, res) => {
-    const newUser = new userModel({ username: req.body.username, email: req.body.email });
-    userModel.register(newUser, req.body.password, (err, user) => {
-        if (err) {
-            console.log(err);
-            return res.redirect('/register');
-        }
-        passport.authenticate('local')(req, res, () => {
-            res.redirect('/');
-        });
-    });
-});
-app.get('/logout', (req, res, next) => {
-    req.logout(function(err) {
-        if (err) { return next(err); }
-        res.redirect('/');
-    });
-});
+
 app.post('/create-order', async (req, res) => {
     try {
         const { productName, productBrand, productPrice, customerName, customerPhone, customerAddress, customerEmail } = req.body;
@@ -139,60 +100,7 @@ app.get('/order-confirmation/:id', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-app.get('/my-orders', isLoggedIn, async (req, res) => {
-    const userOrders = await orderModel.find({ userId: req.user._id });
-    res.render('my-orders', { orders: userOrders });
-});
-app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile', { user: req.user });
-});
-app.post('/profile/update', isLoggedIn, async (req, res) => {
-    const user = await userModel.findById(req.user._id);
-    if (req.body.email) user.email = req.body.email;
-    if (req.body.newpassword) await user.setPassword(req.body.newpassword);
-    await user.save();
-    res.redirect('/profile');
-});
-app.post('/orders/cancel/:id', isLoggedIn, async (req, res) => {
-    const order = await orderModel.findOne({ _id: req.params.id, userId: req.user._id });
-    if (order && order.status === 'Pending') {
-        order.status = 'Cancelled';
-        await order.save();
-    }
-    res.redirect('/my-orders');
-});
-app.get('/Delivery', isLoggedIn, isAdmin, async (req, res) => {
-    const allOrders = await orderModel.find({});
-    res.render("delivery", { orders: allOrders });
-});
-app.post('/orders/delete/:id', isLoggedIn, isAdmin, async (req, res) => {
-    await orderModel.findByIdAndDelete(req.params.id);
-    res.redirect('/Delivery');
-});
-app.post('/send-message', (req, res) => {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const msg = {
-        to: 'rahaafinternational@gmail.com', 
-        from: 'website-notifications@yourdomain.com',
-        subject: `New Message from ${req.body.name}`,
-        text: `You have a new message from:
-        Name: ${req.body.name}
-        Email: ${req.body.email}
-        Message:
-        ${req.body.message}`,
-        replyTo: req.body.email, 
-    };
-    sgMail
-        .send(msg)
-        .then(() => {
-            console.log('Email sent successfully via SendGrid');
-            res.redirect('/#contact'); 
-        })
-        .catch((error) => {
-            console.error('SendGrid Error:', error);
-            res.redirect('/#contact'); 
-        });
-});
+
 app.listen(3000, function() {
   console.log('Server is running on http://localhost:3000');
 });
