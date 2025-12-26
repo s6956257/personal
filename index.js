@@ -101,6 +101,8 @@ app.get('/order-confirmation/:id', async (req, res) => {
     }
 });
 
-app.listen(3000, function() {
-  console.log('Server is running on http://localhost:3000');
+const PORT = process.env.PORT || 8066; 
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
